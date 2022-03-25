@@ -19,7 +19,7 @@ public class RegistrationController {
 
     @PostMapping("/user")
     public User registerUser(@RequestBody User user) throws Exception {
-        String existingEmail= user.getEmailId();
+        String existingEmail= user.getEmail();
         if(existingEmail != null && !existingEmail.isBlank()){
            User userObject = registrationService.fetchUserByEmailId(existingEmail);
             if(userObject != null){
@@ -33,7 +33,7 @@ public class RegistrationController {
 
     @PostMapping("/login")
     public User loginUser(@RequestBody User user) throws Exception {
-        String existingEmail=user.getEmailId();
+        String existingEmail=user.getEmail();
         String existingPassword=user.getPassword();
         User userObject=null;
         if(existingEmail!=null && existingPassword!=null){

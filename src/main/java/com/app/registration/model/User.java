@@ -11,8 +11,8 @@ public class User {
     @Column(nullable = false, updatable = false, name = "ID")
     private UUID id;
 
-    @Column(name = "EMAIL_ID")
-    private String emailId;
+    @Column(name = "EMAIL")
+    private String email;
 
     @Column(name = "USER_NAME")
     private String userName;
@@ -20,9 +20,9 @@ public class User {
     @Column(name = "PASSWORD")
     private String password;
 
-    public User(UUID id, String emailId, String userName, String password) {
+    public User(UUID id, String email, String userName, String password) {
         this.id = id;
-        this.emailId = emailId;
+        this.email = email;
         this.userName = userName;
         this.password = password;
     }
@@ -38,12 +38,12 @@ public class User {
         this.id = id;
     }
 
-    public String getEmailId() {
-        return emailId;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getUserName() {
