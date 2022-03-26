@@ -16,11 +16,11 @@ public class RegistrationService {
         return registrationRepository.save(user);
     }
 
-    public User fetchUserByEmailId(String email){
-      return registrationRepository.findByEmailId(email);
+    public User fetchUserByEmail(String email){
+      return registrationRepository.findByEmail(email);
     }
 
-    public User fetchUserByEmailIdAndPassword(String email,String password){
-        return registrationRepository.findByEmailIdAndPassword(email,password);
+    public User fetchUserByEmailAndPassword(String email,String password){
+        return registrationRepository.findByEmailAndPassword(email,password);
     }
 }
