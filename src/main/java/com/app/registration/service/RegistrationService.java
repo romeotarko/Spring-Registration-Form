@@ -12,15 +12,35 @@ public class RegistrationService {
     @Autowired
     private RegistrationRepository registrationRepository;
 
-    public User saveUser(User user){
+    public User saveUser(User user) {
         return registrationRepository.save(user);
     }
 
-    public User fetchUserByEmail(String email){
-      return registrationRepository.findByEmail(email);
+    public User fetchUserByEmail(User user) throws Exception {
+
+        String existingEmail = user.getEmail();
+        if (existingEmail != null && !existingEmail.isBlank()) {
+            User userObject = registrationRepository.findByEmail(user.getEmail());
+            if (userObject != null) {
+                throw new Exception("User with " + existingEmail + " already exists");
+            }
+        }
+        User userObject = null;
+        userObject = saveUser(user);
+        return userObject;
     }
 
-    public User fetchUserByEmailAndPassword(String email,String password){
-        return registrationRepository.findByEmailAndPassword(email,password);
+
+    public User fetchUserByEmailAndPassword(User user) throws Exception {
+        String existingEmail = user.getEmail();
+        String existingPassword = user.getPassword();
+        User userObject = null;
+        if (existingEmail != null && existingPassword != null) {
+            userObject = registrationRepository.findByEmailAndPassword(existingEmail, existingPassword);
+            if (userObject == null) {
+                throw new Exception("Bad credentials , this user doesn't exists");
+            }
+        }
+        return userObject;
     }
 }
