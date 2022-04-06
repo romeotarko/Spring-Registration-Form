@@ -20,14 +20,26 @@ public class User {
     @Column(name = "PASSWORD")
     private String password;
 
-    public User(UUID id, String email, String userName, String password) {
+    @Column(name="PHONE")
+    private Integer phone;
+
+    public User(UUID id, String email, String userName, String password, Integer phone) {
         this.id = id;
         this.email = email;
         this.userName = userName;
         this.password = password;
+        this.phone=phone;
     }
 
     public User() {
+    }
+
+    public Integer getPhone() {
+        return phone;
+    }
+
+    public void setPhone(Integer phone) {
+        this.phone = phone;
     }
 
     public UUID getId() {

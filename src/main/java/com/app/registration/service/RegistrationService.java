@@ -1,5 +1,6 @@
 package com.app.registration.service;
 
+import com.app.registration.dto.UserLogin;
 import com.app.registration.model.User;
 import com.app.registration.repository.RegistrationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +28,15 @@ public class RegistrationService {
         }
         User userObject = null;
         userObject = saveUser(user);
+        //TODO Send a message on Phone number to notify the user for the registration
         return userObject;
     }
 
 
-    public User fetchUserByEmailAndPassword(User user) throws Exception {
-        String existingEmail = user.getEmail();
-        String existingPassword = user.getPassword();
-        User userObject = null;
+    public UserLogin fetchUserByEmailAndPassword(UserLogin userLogin) throws Exception {
+        String existingEmail = userLogin.getEmail();
+        String existingPassword = userLogin.getPassword();
+        UserLogin userObject = null;
         if (existingEmail != null && existingPassword != null) {
             userObject = registrationRepository.findByEmailAndPassword(existingEmail, existingPassword);
             if (userObject == null) {
