@@ -3,10 +3,11 @@ package com.app.registration.service;
 import com.app.registration.dto.UserLogin;
 import com.app.registration.model.User;
 import com.app.registration.repository.RegistrationRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+@Slf4j
 @Service
 public class RegistrationService {
 
@@ -33,16 +34,17 @@ public class RegistrationService {
     }
 
 
-    public UserLogin fetchUserByEmailAndPassword(UserLogin userLogin) throws Exception {
-        String existingEmail = userLogin.getEmail();
-        String existingPassword = userLogin.getPassword();
+    public User fetchUserByEmailAndPassword(UserLogin userLogin) throws Exception {
+        User user = new User();
+        user.setEmail(userLogin.getEmail());
+        user.setPassword( userLogin.getPassword());
         UserLogin userObject = null;
-        if (existingEmail != null && existingPassword != null) {
-            userObject = registrationRepository.findByEmailAndPassword(existingEmail, existingPassword);
+        if (user.getEmail() != null && user.getPassword() != null) {
+            userObject = registrationRepository.findByEmailAndPassword(user.getEmail(), user.getPassword());
             if (userObject == null) {
                 throw new Exception("Bad credentials , this user doesn't exists");
             }
         }
-        return userObject;
+        return user;
     }
 }
